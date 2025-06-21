@@ -2,8 +2,8 @@
 
 🎓 **Master's Thesis Project**  
 **Title:** *A Web-Based Control System for Massive Distributed Channel Sounder Equipment Networks*  
-**Author:** [Your Name]  
-**Institution:** [Your University Name]  
+**Author:** Stan Notaert  
+**Institution:** NTNU  
 **Year:** 2025
 
 ---
