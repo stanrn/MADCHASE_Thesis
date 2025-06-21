@@ -12,6 +12,7 @@ typedef struct {
 
 MeasPair read_uart_role(void){
     uart_init();
+    //SPI code not implemented!!
     /*spi_get_buffer();
     uart_put_string("XDit gebeurt");
     if(test_spi() && set_spi_buffer() == 1){
@@ -23,7 +24,7 @@ MeasPair read_uart_role(void){
     else{
         uart_put_string("SPI UNINIT");
     }*/
-
+    // Reading the role and seed value from UART, changing role and returning it
     char buf[16]; // Max 1 role + 2 digits seed (e.g., r99) + null
     MeasPair result = { .role = CMD_UNKNOWN, .seed = -1 };
     if (uart_chars_available()){

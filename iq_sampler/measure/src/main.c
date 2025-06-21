@@ -66,11 +66,11 @@
 #define MISO_PIN 15
 #endif
 
-//stop
 #include "dm.c"
 #include "uart.c"
 #include "roles.c"
 
+// Setting config and report variables for distance measurements
 static nrf_dm_config_t dm_config;
 static nrf_dm_report_t dm_report;
 
@@ -84,8 +84,10 @@ void *__dso_handle = 0;
 }
 #endif
 
+// None of the SPI code is currently implemented
 int main(void)
 {
+  //Initialization
   dm_clock_init();
   debug_init();
   dm_init();
@@ -94,9 +96,11 @@ int main(void)
   /*spi_init();
   manual_isr_setup();
   set_spi_buffer();*/
+  // Getting first roles
   MeasPair result = read_uart_role();
   current_role = result.role;
   int seed = result.seed + 40;
+  // While loop for dynamic role changing
   while(1){
     if (current_role == CMD_INITIATOR){
       result = run_initiator(seed);

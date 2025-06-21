@@ -44,6 +44,7 @@ void spis_event_handler(nrfx_spis_evt_t const *p_event, void *p_context) {
       uart_put_string("BUFFER SET DONE\n");
     }
 }
+//SPI Initialization
 void spi_init(void){
   nrfx_spis_config_t spi_config = NRFX_SPIS_DEFAULT_CONFIG(SCK_PIN,MOSI_PIN,MISO_PIN,SS_PIN);
     spi_config.mode = NRF_SPIS_MODE_0;
@@ -58,13 +59,13 @@ void spi_init(void){
 void spi_uninit(void){
   nrfx_spis_uninit(&instance_spi);
 }
-
+// Setting interrupts manually
 static void manual_isr_setup()
 {
 	IRQ_DIRECT_CONNECT(SPIM0_SPIS0_TWIM0_TWIS0_SPI0_TWI0_IRQn, 0, nrfx_spis_0_irq_handler, 0);
 	irq_enable(SPIM0_SPIS0_TWIM0_TWIS0_SPI0_TWI0_IRQn);
 }
-
+//Testing correct initialization of SPI
 int test_spi(void){
   if(!nrfx_spis_init_check(&instance_spi)){
     return 0;
@@ -72,11 +73,11 @@ int test_spi(void){
   return 1;
 }
 
-
+//Read value of the chip select pin, if low SPI is being communicated
 bool read_cs_state_raw(void) {
     return (NRF_P0->IN & (1 << 12)) != 0;  // true = HOOG, false = LAAG
 }
-
+//Empty the buffers for SPI communication
 int set_spi_buffer(void){
   memset(rx_buffer, 0, SPI_BUFFER_SIZE);
   transfer_done = false;
@@ -105,7 +106,7 @@ void fake_measurement_and_json(char *json_out, size_t max_len) {
     // Bouw de JSON-string zelf
     snprintf(json_out, max_len, "{\"distance\":%.2f,\"unit\":\"%s\"}", distance, unit);
 }
-
+// Read from the SPI buffer
 void spi_get_buffer(void){
   if(read_cs_state_raw()){
     uart_put_string("CS hoog");
@@ -131,7 +132,7 @@ void spi_get_buffer(void){
   }
 }
 
-
+// Sending string over UART
 void uart_put_string(const char * string)
 {
   while (*string != '\0')
