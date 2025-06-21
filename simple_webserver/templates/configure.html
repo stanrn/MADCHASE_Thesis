@@ -1,0 +1,19 @@
+<!-- HTML configuration page-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Control Bluetooth Modules</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="" />
+  <link rel="icon" href="favicon.png">
+<link href="{{ url_for('static', filename='style.css')}}" rel="stylesheet"/>
+</head>
+<body>
+  <h1>Initiating measurement: {{title}}</h1>
+  <h2>The Initiator will be: {{initiator}}   The reflector will be: {{reflector}}</h2>
+  <form action="/results" method="POST">
+    <button type="submit">See results</button>
+  </form>
+</body>
+</html>

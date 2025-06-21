@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Control Bluetooth Modules</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="" />
+  <link rel="icon" href="favicon.png">
+<link href="{{ url_for('static', filename='style.css')}}" rel="stylesheet"/>
+</head>
+<body>
+  <h1>Measurement results</h1>
+  <a class="download-icon" href="{{ url_for('download_file',filename='results.zip') }}">
+    <img src="{{ url_for('static', filename='download_icon.png') }}" alt="Download ZIP" width="100">
+  </a>
+  <div class="image-gallery">
+    {% for img in image_files %}
+        <div style="margin: 10px; display: inline-block;"class="image-card">
+            <img src="{{ url_for('send_image',folder='png', filename=img) }}" alt="{{ img }}" width="400">
+            <p>{{ img }}</p>
+        </div>
+    {% endfor %}
+  </div>
+</body>
+</html>

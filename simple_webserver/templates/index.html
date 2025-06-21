@@ -1,0 +1,59 @@
+<!-- HTML index page-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Control Bluetooth Modules</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="" />
+  <link rel="icon" href="favicon.png">
+  <link href="{{ url_for('static', filename='style.css')}}" rel="stylesheet"/>
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <script src="{{ url_for('static', filename='rpi_handling.js') }}"></script>
+</head>
+<body>
+  <h1>{{message}}</h1>
+  <div class="forms-wrapper">
+    <div class="sidebar">
+      <table id="rpi-table">
+        <thead>
+          <tr>
+            <th>Active</th>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="forms-content">
+      <div class="form-block">
+        <form action="/configure" method="POST">
+          <h2>Point-to-Point Channel Measurement</h2>
+          <!-- Text Input -->
+          <input type="text" name="title" placeholder="Enter the measurement title" />
+          <br>
+          <!-- Dropdown Menu 1 -->
+          <label for="initiator">Select Initiator:</label>
+          <select id="initiator" name="initiator">
+          </select>
+          <br>
+          <!-- Dropdown Menu 2 -->
+          <label for="reflector">Select Reflector:</label>
+          <select id="reflector" name="reflector">
+          </select>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+      <!-- Broadcast measurement starter -->
+      <div class="form-block">
+        <form action="/broadcast" method="POST">
+          <h2>Broadcasting Measurement</h2>
+          <!-- Text input Interval -->
+          <label for="interval">Measurement interval(seconds):</label>
+          <input type="text" name="interval" placeholder="Enter interval time" />
+          </select>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!-- HTML broadcast page-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Broadcasting measurement</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="" />
+  <link rel="icon" href="favicon.png">
+  <link href="{{ url_for('static', filename='style.css')}}" rel="stylesheet"/>
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <script src="{{ url_for('static', filename='table_handling.js') }}"></script>
+</head>
+<body>
+  <h1>Broadcasting measurement each {{interval}} seconds</h1>
+  <table id="channel-table">
+    <thead>
+      <tr>
+        <th>Transmitter</th><th>Receiver</th><th>Timestamp</th><th>Loss (dB)</th><th>Delay (ns)</th><th>Distance (mm)</th><th>Quality (0-100)</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <!-- Broadcast measurement exit -->
+  <div class="form-block">
+    <button onclick="stopBroadcast()">Stop Broadcast</button>
+
+    <script>
+    function stopBroadcast() {
+      fetch('/broadcast_stop', { method: 'POST' })
+        .then(response => {
+          if (response.ok) {
+            console.log('Broadcast stopped');
+          }
+        });
+    }
+    window.addEventListener('unload', function () {
+    navigator.sendBeacon('/broadcast_stop');  // Sends a POST even during page unload
+    });
+    </script>
+  </div>
+</body>
+</html>
