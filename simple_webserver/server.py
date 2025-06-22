@@ -12,7 +12,7 @@ from flask_socketio import SocketIO, emit
 
 # Flask and socketIO setup
 app = Flask(__name__)
-socketio = SocketIO(app, cors_allowed_origins="*")
+socketio = SocketIO(app, cors_allowed_origins="*", logger=True, engineio_logger=True)
 abs_path = ""
 
 # MQTT connection setup

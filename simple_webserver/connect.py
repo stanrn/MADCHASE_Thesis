@@ -133,7 +133,7 @@ def detect_active_rpis(client,socketio:SocketIO):
                 del last_seen[rpi]
         client.publish("active",1)
         time.sleep(5)
-        socketio.emit('rpi_list', list(last_seen.keys()), to='broadcast')
+        socketio.emit('rpi_list', list(last_seen.keys()), namespace='')
 
 # Function that returns the set of active RPis
 def get_active_rpis():
