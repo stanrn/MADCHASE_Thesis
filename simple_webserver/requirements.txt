@@ -1,7 +1,7 @@
-flask
-flask-socketio
-eventlet
-paho-mqtt
-cairosvg
-matplotlib
-numpy
+flask==2.3.2
+flask-socketio==5.3.6
+eventlet==0.33.3
+paho-mqtt==1.6.1
+cairosvg==2.7.6
+matplotlib==3.7.1
+numpy==1.25.2
